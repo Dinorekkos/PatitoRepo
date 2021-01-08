@@ -64,7 +64,7 @@ namespace Gameplays.Mosquitoes
         private void Update()
         {
             //Every frame set position to target position
-            transform.position = Vector3.SmoothDamp(transform.position, _targetPosition, ref _followSpeed, _followSmoothTime);
+            transform.position = Vector3.SmoothDamp(transform.position, _targetPosition, ref _followSpeed, _followSmoothTime, _maxSpeed);
         }
 
         private void HandleFingerUpdate(LeanFinger finger)
@@ -102,6 +102,8 @@ namespace Gameplays.Mosquitoes
         private bool _followYAxis = true;
         [SerializeField]
         private float _followSmoothTime = 0.1f;
+        [SerializeField]
+        private float _maxSpeed = 2f;
 
         [SerializeField]
         private float _targetZPosition = 0f;
