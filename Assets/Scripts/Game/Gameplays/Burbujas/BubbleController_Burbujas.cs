@@ -19,13 +19,6 @@ namespace Gameplays.Burbujas
             myCollider.enabled = false;
         }
 
-        public void InstaExplode()
-        {
-            myCollider.enabled = false;
-
-            myAnimator.SetTrigger(TRIGGER_INSTA_EXPLODE_NAME);
-        }
-
         public void FinishExplodeAnimationEvent()
         {
             hasExploded = true;
@@ -123,7 +116,6 @@ namespace Gameplays.Burbujas
         private Collider2D myCollider;
 
         private const string TRIGGER_EXPLODE_NAME = "explode";
-        private const string TRIGGER_INSTA_EXPLODE_NAME = "instaExplode";
         #endregion
     }
 }

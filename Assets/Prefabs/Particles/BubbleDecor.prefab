@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 3068996690475889331, guid: bf635c79d19de264b89c3ac5a2556d96, type: 3}
       propertyPath: myCollider
       value: 
-      objectReference: {fileID: 2493038501761704463}
+      objectReference: {fileID: 4411059570628371372}
     - target: {fileID: 3068996690475889331, guid: bf635c79d19de264b89c3ac5a2556d96, type: 3}
       propertyPath: minMaxSpeed.x
       value: 1
@@ -87,10 +87,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BubbleDecor
       objectReference: {fileID: 0}
-    - target: {fileID: 6838365564051075111, guid: bf635c79d19de264b89c3ac5a2556d96, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8784365567920094090, guid: bf635c79d19de264b89c3ac5a2556d96, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -99,8 +95,8 @@ PrefabInstance:
     - {fileID: 1299240149106125918, guid: bf635c79d19de264b89c3ac5a2556d96, type: 3}
     - {fileID: 2098718490117622726, guid: bf635c79d19de264b89c3ac5a2556d96, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bf635c79d19de264b89c3ac5a2556d96, type: 3}
---- !u!70 &2493038501761704463 stripped
-CapsuleCollider2D:
-  m_CorrespondingSourceObject: {fileID: 7369687728176790057, guid: bf635c79d19de264b89c3ac5a2556d96, type: 3}
+--- !u!61 &4411059570628371372 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8784365567920094090, guid: bf635c79d19de264b89c3ac5a2556d96, type: 3}
   m_PrefabInstance: {fileID: 4962807077839345702}
   m_PrefabAsset: {fileID: 0}
