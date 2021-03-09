@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 822793917}
   - component: {fileID: 822793916}
   m_Layer: 0
-  m_Name: _dle_00000
+  m_Name: Jefe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
