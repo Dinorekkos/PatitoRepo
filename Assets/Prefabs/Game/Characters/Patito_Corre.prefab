@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d738dba1b8e4e8242bb5907da1ddee46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 3
   JumpSpeed: 8
   MoveSpeed: 6
   AutomaticJump: 0
@@ -20,6 +21,8 @@ MonoBehaviour:
   myCharacterController: {fileID: 635993562683344433}
   jumpMinTime: 0.12
   myAnimator: {fileID: 1407447619711681167}
+  hasMaxPosition: 1
+  maxHorizontalPosition: 285
 --- !u!1001 &635993564439728363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37,7 +40,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1971383536499504301, guid: 1332a99c3ae64834cb683ddf0bb4305c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3.91
       objectReference: {fileID: 0}
     - target: {fileID: 1971383536499504301, guid: 1332a99c3ae64834cb683ddf0bb4305c, type: 3}
       propertyPath: m_LocalPosition.z

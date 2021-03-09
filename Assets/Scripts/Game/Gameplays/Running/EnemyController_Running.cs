@@ -10,6 +10,7 @@ namespace Gameplays.Running
         public void Initialize()
         {
             Speed = _initialSpeed;
+            myAnimator.SetBool(ISMOVING_ANIM_NAME, true);
         }
         #endregion
 
@@ -34,6 +35,16 @@ namespace Gameplays.Running
 
         private void Update()
         {
+            if (hasMaxPosition)
+            {
+                //Reached max position, stop
+                if (transform.position.x >= maxHorizontalPosition)
+                {
+                    return;
+                }
+            }
+
+
             //Add position using current speed
             Vector3 targetPosition = transform.position;
             targetPosition.x += Speed * Time.deltaTime;
@@ -79,6 +90,18 @@ namespace Gameplays.Running
 
         [SerializeField]
         private float _speed = 0;
+
+        [SerializeField]
+        private Animator myAnimator;
+
+        private const string ISMOVING_ANIM_NAME = "isMoving";
+        private const string ISGROUNDED_ANIM_NAME = "isGrounded";
+        private const string JUMP_ANIM_NAME = "jump";
+
+        [SerializeField]
+        private bool hasMaxPosition = false;
+        [SerializeField]
+        private float maxHorizontalPosition = 0;
         #endregion
     }
 }

@@ -17,6 +17,8 @@ namespace Gameplays.Running
                 isJumpMade = true;
                 counterJump++;
                 //AudioController.Instance.PlayOneShotSoundEffect(SoundKeys.JumpSoundKey);
+                myAnimator.SetTrigger(JUMP_ANIM_NAME);
+                myAnimator.SetBool(ISGROUNDED_ANIM_NAME, false);
             }
         }
 
@@ -126,6 +128,8 @@ namespace Gameplays.Running
                 counterJump = 0;
             }
 
+            myAnimator.SetBool(ISGROUNDED_ANIM_NAME, myCharacterController.State.IsGrounded);
+
             HandleHorizontalMovement();
             HandleVerticalMovement();
         }
@@ -135,7 +139,19 @@ namespace Gameplays.Running
             //if (state == PlayerState.Attacking)
             //    return;
 
-
+            if (hasMaxPosition)
+            {
+                if (transform.position.x < maxHorizontalPosition)
+                {
+                    horizontalDirection = 1;
+                } else
+                {
+                    horizontalDirection = 0;
+                }
+            } else
+            {
+                horizontalDirection = 1;
+            }
 
             //If horizontal direction is too low, is not relevant
             if (Mathf.Abs(horizontalDirection) < 0.1f)
@@ -199,7 +215,14 @@ namespace Gameplays.Running
             //newHorizontalForce *= aliveSpeedMultiplier;
 
             myCharacterController.SetHorizontalForce(newHorizontalForce);
-            //myAnimator.SetFloat(HorozontalSpeedAnimatorName, newHorizontalForce);
+
+            if (Mathf.Abs(newHorizontalForce) > 0.01f)
+            {
+                myAnimator.SetBool(ISMOVING_ANIM_NAME, true);
+            } else
+            {
+                myAnimator.SetBool(ISMOVING_ANIM_NAME, false);
+            }
         }
 
         private void HandleVerticalMovement()
@@ -290,6 +313,15 @@ namespace Gameplays.Running
         private Animator myAnimator;
 
         private const string WALKING_ANIM_NAME = "caminando";
+
+        private const string ISMOVING_ANIM_NAME = "isMoving";
+        private const string ISGROUNDED_ANIM_NAME = "isGrounded";
+        private const string JUMP_ANIM_NAME = "jump";
+
+        [SerializeField]
+        private bool hasMaxPosition = false;
+        [SerializeField]
+        private float maxHorizontalPosition = 0;
         #endregion
     }
 
