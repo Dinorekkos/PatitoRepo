@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2029016795, guid: 1332a99c3ae64834cb683ddf0bb4305c, type: 3}
+      propertyPath: myAnimator
+      value: 
+      objectReference: {fileID: 3292361849420514988}
+    - target: {fileID: 2029016795, guid: 1332a99c3ae64834cb683ddf0bb4305c, type: 3}
       propertyPath: AllwaysGoingRight
       value: 1
       objectReference: {fileID: 0}
@@ -61,3 +65,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1332a99c3ae64834cb683ddf0bb4305c, type: 3}
+--- !u!95 &3292361849420514988 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1971383536803844708, guid: 1332a99c3ae64834cb683ddf0bb4305c, type: 3}
+  m_PrefabInstance: {fileID: 3957277903069975752}
+  m_PrefabAsset: {fileID: 0}

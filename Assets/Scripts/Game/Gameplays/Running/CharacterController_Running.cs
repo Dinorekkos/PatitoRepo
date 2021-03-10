@@ -311,9 +311,7 @@ namespace Gameplays.Running
 
         [SerializeField]
         private Animator myAnimator;
-
-        private const string WALKING_ANIM_NAME = "caminando";
-
+        
         private const string ISMOVING_ANIM_NAME = "isMoving";
         private const string ISGROUNDED_ANIM_NAME = "isGrounded";
         private const string JUMP_ANIM_NAME = "jump";

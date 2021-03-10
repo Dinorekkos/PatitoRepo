@@ -17,6 +17,9 @@ namespace Gameplays.Burbujas
                 isJumpMade = true;
                 counterJump++;
                 //AudioController.Instance.PlayOneShotSoundEffect(SoundKeys.JumpSoundKey);
+
+                myAnimator.SetTrigger(JUMP_ANIM_NAME);
+                myAnimator.SetBool(ISGROUNDED_ANIM_NAME, false);
             }
         }
 
@@ -125,6 +128,8 @@ namespace Gameplays.Burbujas
                 counterJump = 0;
             }
 
+            myAnimator.SetBool(ISGROUNDED_ANIM_NAME, myCharacterController.State.IsGrounded);
+
             HandleHorizontalMovement();
             HandleVerticalMovement();
         }
@@ -228,6 +233,8 @@ namespace Gameplays.Burbujas
 
         private void OnEnable()
         {
+            myAnimator.SetBool(ISMOVING_ANIM_NAME, false);
+
             LeanTouch.OnFingerDown += HandleFingerDown;
             LeanTouch.OnFingerUp += HandleFingerUp;
         }
@@ -288,6 +295,13 @@ namespace Gameplays.Burbujas
 
         private bool isJumpMade = false;
         private int counterJump = 0;
+
+        [SerializeField]
+        private Animator myAnimator;
+
+        private const string ISMOVING_ANIM_NAME = "isMoving";
+        private const string ISGROUNDED_ANIM_NAME = "isGrounded";
+        private const string JUMP_ANIM_NAME = "jump";
         #endregion
     }
 
