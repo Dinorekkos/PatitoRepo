@@ -1,23 +1,28 @@
-﻿using System.Collections;
+﻿using Lean.Touch;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Lean.Touch;
 
-namespace Gameplays.Burbujas
+namespace Gameplays.Platformer
 {
-    public class CharacterController_Burbujas : MonoBehaviour
+    public class CharacterController_Platformer : MonoBehaviour
     {
         #region public methods
         public void Jump()
         {
+            Jump(JumpSpeed);
+        }
+
+        public void Jump(float jumpSpeed)
+        {
             if (CanJump)
             {
-                myCharacterController.SetVerticalForce(Mathf.Sqrt(JumpSpeed * Mathf.Abs(myCharacterController.Parameters.Gravity)));
+                Debug.Log("CALL JUMP");
+                myCharacterController.SetVerticalForce(Mathf.Sqrt(jumpSpeed * Mathf.Abs(myCharacterController.Parameters.Gravity)));
                 lastJumpTime = Time.time;
                 isJumpMade = true;
                 counterJump++;
                 //AudioController.Instance.PlayOneShotSoundEffect(SoundKeys.JumpSoundKey);
-
                 myAnimator.SetTrigger(JUMP_ANIM_NAME);
                 myAnimator.SetBool(ISGROUNDED_ANIM_NAME, false);
             }
@@ -27,19 +32,42 @@ namespace Gameplays.Burbujas
         {
             if (CanStopJumping)
             {
+                Debug.Log("STOP VERTICAL FORCE");
                 myCharacterController.SetVerticalForce(StopJumpSpeed);
             }
         }
+
+        public void AddVerticalForce(float force)
+        {
+            //Reset jump confim, cant cancel jump and set vertical force to zero
+            tryCancelJump = false;
+            CharacterController.SetVerticalForce(0f);
+
+            //Add vertical force works like a normal jump
+            lastJumpTime = Time.time;
+            if (isJumpPressed)
+            {
+                CharacterController.AddVerticalForce(force * TrampolineJumpingMultiplier);
+            } else
+            {
+                CharacterController.AddVerticalForce(force);
+            }
+            
+            //AudioController.Instance.PlayOneShotSoundEffect(SoundKeys.JumpSoundKey);
+            myAnimator.SetTrigger(JUMP_ANIM_NAME);
+            myAnimator.SetBool(ISGROUNDED_ANIM_NAME, false);
+        }
+        
         #endregion
 
         #region public variables
+        public PlayerState state = PlayerState.Idle;
+        
         public float JumpSpeed;
         public float MoveSpeed;
-        public bool AllwaysGoingRight = false;
-        public bool AutomaticJump = true;
+        public float TrampolineJumpingMultiplier = 1.1f;
+        
         public int MaxJumps = 2;
-
-        public PlayerState state = PlayerState.Idle;
 
         public bool CanJump
         {
@@ -55,13 +83,8 @@ namespace Gameplays.Burbujas
                     if (state == PlayerState.Idle ||
                         state == PlayerState.Running)
                     {
-                        //If automatic, easy jump
-                        if (AutomaticJump)
-                        {
-                            return true;
-                        }
-                        //Else, we need to check that jump is not made
-                        else if(isJumpMade == false)
+                        //If jump is not made, we can jump
+                        if (isJumpMade == false)
                         {
                             return true;
                         }
@@ -117,6 +140,14 @@ namespace Gameplays.Burbujas
                 return transform.localScale;
             }
         }
+
+        public CharacterController2D CharacterController
+        {
+            get
+            {
+                return myCharacterController;
+            }
+        }
         #endregion
 
         #region private methods
@@ -126,19 +157,43 @@ namespace Gameplays.Burbujas
             if (myCharacterController.State.IsGrounded)
             {
                 counterJump = 0;
+
+                //If grounded, and we are not pressing jump, cant cancel jump
+                if (!isJumpPressed)
+                    tryCancelJump = false;
             }
 
             myAnimator.SetBool(ISGROUNDED_ANIM_NAME, myCharacterController.State.IsGrounded);
 
+            HandleInput();
             HandleHorizontalMovement();
             HandleVerticalMovement();
         }
 
+        private void HandleInput()
+        {
+            //Save current horizontal direction
+            horizontalDirection = myJoystick.Horizontal;
+            verticalDirection = myJoystick.Vertical;
+
+#if UNITY_EDITOR
+            if (Input.GetKey(KeyCode.A))
+            {
+                horizontalDirection--;
+                if (horizontalDirection < -1)
+                    horizontalDirection = -1;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                horizontalDirection = 1;
+                if (horizontalDirection > 1)
+                    horizontalDirection = 1;
+            }
+#endif
+        }
+
         private void HandleHorizontalMovement()
         {
-            //if (state == PlayerState.Attacking)
-            //    return;
-
             //If horizontal direction is too low, is not relevant
             if (Mathf.Abs(horizontalDirection) < 0.1f)
             {
@@ -147,7 +202,8 @@ namespace Gameplays.Burbujas
                 {
                     state = PlayerState.Idle;
                 }
-            } else
+            }
+            else
             {
                 if (state == PlayerState.Idle)
                 {
@@ -159,7 +215,8 @@ namespace Gameplays.Burbujas
             if (horizontalDirection > 0)
             {
                 Scale = facingRightScale;
-            } else 
+            }
+            else
             if (horizontalDirection < 0)
             {
                 Scale = facingLeftScale;
@@ -179,18 +236,18 @@ namespace Gameplays.Burbujas
             float newHorizontalForce;
             //Add a smooth movement
             newHorizontalForce = Mathf.Lerp(myCharacterController.Speed.x, horizontalDirection * MoveSpeed, Time.deltaTime * movementFactor);
-            
+
             //I has friction
             if (myCharacterController.Friction > 1)
             {
                 newHorizontalForce = newHorizontalForce / myCharacterController.Friction;
             }
             //If friction is less than 1, the player slips
-            if(myCharacterController.Friction < 1 && myCharacterController.Friction > 0)
+            if (myCharacterController.Friction < 1 && myCharacterController.Friction > 0)
             {
                 newHorizontalForce = Mathf.Lerp(myCharacterController.Speed.x, newHorizontalForce, Time.deltaTime * myCharacterController.Friction * 10);
             }
-            
+
             //float aliveSpeedMultiplier = 1f;
             //if (state == PlayerState.Dying)
             //{
@@ -199,7 +256,15 @@ namespace Gameplays.Burbujas
             //newHorizontalForce *= aliveSpeedMultiplier;
 
             myCharacterController.SetHorizontalForce(newHorizontalForce);
-            //myAnimator.SetFloat(HorozontalSpeedAnimatorName, newHorizontalForce);
+
+            if (Mathf.Abs(newHorizontalForce) > 0.01f)
+            {
+                myAnimator.SetBool(ISMOVING_ANIM_NAME, true);
+            }
+            else
+            {
+                myAnimator.SetBool(ISMOVING_ANIM_NAME, false);
+            }
         }
 
         private void HandleVerticalMovement()
@@ -208,91 +273,79 @@ namespace Gameplays.Burbujas
             {
                 Jump();
             }
-            else
+
+            if (tryCancelJump)
             {
                 StopJump();
             }
 
-            //If state is jumping but character is grounded, set idle state
+            //If state is jumping, but character is grounded, set idle state
             if (state == PlayerState.Jumping && myCharacterController.State.IsGrounded)
             {
                 state = PlayerState.Idle;
             }
 
-            //If state is running, but is not grounded, and is not falling, set jumping
-            if (state == PlayerState.Running &&
+            //If state is running or idle, but is not grounded, and is not falling, set jumping
+            if ((state == PlayerState.Running || state == PlayerState.Idle) &&
                 !myCharacterController.State.IsGrounded &&
                 !myCharacterController.State.IsFalling)
+            {
                 state = PlayerState.Jumping;
-
+            }
+            
             //myAnimator.SetFloat(VerticalSpeedAnimatorName, myCharacterController.Speed.y);
             //myAnimator.SetBool(GroundedAnimatorName, myCharacterController.State.IsCollidingBelow);
         }
 
         private void OnEnable()
         {
-            myAnimator.SetBool(ISMOVING_ANIM_NAME, false);
-
-            LeanTouch.OnFingerDown += HandleFingerDown;
-            LeanTouch.OnFingerUp += HandleFingerUp;
+            myJumpButton.OnPointerDownEvent += HandleJumpButtonDown;
+            myJumpButton.OnPointerUpEvent += HandleJumpButtonUp;
         }
 
         private void OnDisable()
         {
-            LeanTouch.OnFingerDown -= HandleFingerDown;
-            LeanTouch.OnFingerUp += HandleFingerUp;
+            myJumpButton.OnPointerDownEvent -= HandleJumpButtonDown;
+            myJumpButton.OnPointerUpEvent -= HandleJumpButtonUp;
         }
 
-        private void HandleFingerDown(LeanFinger finger)
+        private void HandleJumpButtonDown()
         {
             isJumpPressed = true;
-            
-            Vector3 fingerViewportPoint = Camera.main.ScreenToViewportPoint(finger.ScreenPosition);
-
-            //If allways going right, horizontal direction is 1
-            if (AllwaysGoingRight)
-            {
-                horizontalDirection = 1;
-            }
-            else
-            {
-                if (fingerViewportPoint.x >= 0.5f)
-                {
-                    horizontalDirection = 1;
-                } else
-                {
-                    horizontalDirection = -1;
-                }
-            }
         }
 
-        private void HandleFingerUp(LeanFinger finger)
+        private void HandleJumpButtonUp()
         {
             isJumpPressed = false;
             isJumpMade = false;
-
-            horizontalDirection = 0;
+            tryCancelJump = true;
         }
         #endregion
 
         #region private variables
         [SerializeField]
         private CharacterController2D myCharacterController;
+        [SerializeField]
+        private Joystick myJoystick;
+        [SerializeField]
+        private ButtonEvent myJumpButton;
 
         [SerializeField]
         private float jumpMinTime = 1f;
-        
+
         private float lastJumpTime = -20;
 
         private bool isJumpPressed = false;
 
         private float horizontalDirection = 0;
+        private float verticalDirection = 0;
 
         private Vector3 facingRightScale = new Vector3(1, 1, 1);
         private Vector3 facingLeftScale = new Vector3(-1, 1, 1);
 
         private bool isJumpMade = false;
         private int counterJump = 0;
+        private bool tryCancelJump = false;
 
         [SerializeField]
         private Animator myAnimator;
@@ -301,8 +354,8 @@ namespace Gameplays.Burbujas
         private const string ISGROUNDED_ANIM_NAME = "isGrounded";
         private const string JUMP_ANIM_NAME = "jump";
         #endregion
-    }
 
+    }
 
     public enum PlayerState
     {
