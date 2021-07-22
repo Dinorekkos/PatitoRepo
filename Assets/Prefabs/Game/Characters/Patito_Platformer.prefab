@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  JumpSpeed: 8
+  JumpSpeed: 10
   MoveSpeed: 6
   TrampolineJumpingMultiplier: 1.1
   MaxJumps: 1

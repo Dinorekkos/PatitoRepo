@@ -183,11 +183,24 @@ namespace Gameplays.Platformer
                 if (horizontalDirection < -1)
                     horizontalDirection = -1;
             }
+
             if (Input.GetKey(KeyCode.D))
             {
                 horizontalDirection = 1;
                 if (horizontalDirection > 1)
                     horizontalDirection = 1;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isJumpPressed = true;
+            }
+
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                isJumpPressed = false;
+                isJumpMade = false;
+                tryCancelJump = true;
             }
 #endif
         }
