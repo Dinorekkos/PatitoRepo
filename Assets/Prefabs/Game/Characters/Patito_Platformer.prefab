@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  JumpSpeed: 10
+  JumpSpeed: 12
   MoveSpeed: 6
   TrampolineJumpingMultiplier: 1.1
   MaxJumps: 1
@@ -48,11 +48,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1971383536499504301, guid: 1332a99c3ae64834cb683ddf0bb4305c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -13.990002
       objectReference: {fileID: 0}
     - target: {fileID: 1971383536499504301, guid: 1332a99c3ae64834cb683ddf0bb4305c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -4.675529
       objectReference: {fileID: 0}
     - target: {fileID: 1971383536499504301, guid: 1332a99c3ae64834cb683ddf0bb4305c, type: 3}
       propertyPath: m_LocalPosition.z

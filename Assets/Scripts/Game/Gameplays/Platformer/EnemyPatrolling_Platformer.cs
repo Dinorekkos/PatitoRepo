@@ -30,11 +30,13 @@ namespace Gameplays.Platformer
             if (state == EnemyPatrollingState.GoingRight)
             {
                 movement = Speed * Time.deltaTime;
+                visualTransform.localScale = new Vector3(1,1,1);
             }
 
             if (state == EnemyPatrollingState.GoingLeft)
             {
                 movement = -Speed * Time.deltaTime;
+                visualTransform.localScale = new Vector3(-1, 1, 1);
             }
 
             Vector3 targetPosition = transform.position;
@@ -72,6 +74,9 @@ namespace Gameplays.Platformer
         private Vector2 _range = new Vector2(-5, 5);
 
         private float originX = 0f;
+
+        [SerializeField]
+        public Transform visualTransform;
         #endregion
     }
 }
