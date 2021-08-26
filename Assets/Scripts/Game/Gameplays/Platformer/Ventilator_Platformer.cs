@@ -15,9 +15,16 @@ public class Ventilator_Platformer : MonoBehaviour
     public VentiladorState state;
 
     public Animator myAnimator;
+
+    public Collider2D_EventHandler HurtboxTrigger;
     #endregion
 
     #region private methods
+    private void Start()
+    {
+        HurtboxTrigger.OnTriggerStay += OnTriggerStayHurtbox;
+    }
+
     private void Update()
     {
         elapsedTimeState += Time.deltaTime;
@@ -42,7 +49,7 @@ public class Ventilator_Platformer : MonoBehaviour
         }
     }
 
-    public void UpdateAttacking()
+    private void UpdateAttacking()
     {
         myAnimator.SetBool(ATTACKING_PARAMETER_NAME, true);
 
@@ -52,6 +59,19 @@ public class Ventilator_Platformer : MonoBehaviour
             elapsedTimeState = 0f;
         }
     }
+
+    private void OnTriggerStayHurtbox(Collider2D collision)
+    {
+        //if ventilator is not attacking, cant make damage
+        if (state != VentiladorState.Attacking)
+            return;
+
+        if (collision.GetComponent<HealthEntity>())
+        {
+            collision.GetComponent<HealthEntity>().MakeDamage(1);
+        }
+    }
+
     #endregion
 
     #region private variables

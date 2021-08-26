@@ -44,6 +44,9 @@ namespace Gameplays.Burbujas
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            if (!canExplode)
+                return;
+
             if (hasCollided)
                 return;
 
@@ -56,6 +59,9 @@ namespace Gameplays.Burbujas
 
         private void OnCollisionStay2D(Collision2D collision)
         {
+            if (!canExplode)
+                return;
+
             if (hasCollided)
                 return;
 
@@ -83,6 +89,9 @@ namespace Gameplays.Burbujas
 
         private bool hasCollided = false;
         private bool hasExploded = false;
+
+        [SerializeField]
+        private bool canExplode = true;
 
         [SerializeField]
         private Animator myAnimator;

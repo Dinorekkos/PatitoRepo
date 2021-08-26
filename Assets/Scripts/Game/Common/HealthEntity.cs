@@ -9,6 +9,8 @@ public class HealthEntity : MonoBehaviour
         //Remove some health
         Health -= damageAmount;
 
+        //Debug.Log("Make damage, to: " + gameObject.name + ", damage: " + damageAmount + ", Health result: " + Health);
+
         //If healt is 0 or less than 0
         if (Health <= 0)
         {
