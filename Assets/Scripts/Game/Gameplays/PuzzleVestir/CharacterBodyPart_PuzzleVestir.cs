@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
 {
+    [SerializeField] private AudioManager audioManager;
     #region public methods
     public void SetClothing(ClotheController_PuzzleVestir clothing)
     {
@@ -14,11 +15,14 @@ public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
             myClothing.state = ClothingState.Idle;
             myClothing = null;
         }
-
         myClothing = clothing;
 
         myClothing.transform.position = this.transform.position;
+        myClothing.transform.rotation = Quaternion.Euler(0,0,0); 
+        audioManager.Play("PieceDown");
+
         myClothing.state = ClothingState.Wearing;
+       
     }
     #endregion
 
@@ -54,6 +58,7 @@ public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
     private bool _isValid = false;
     #endregion
 }
+
 
 [System.Serializable]
 public enum BodyPartType

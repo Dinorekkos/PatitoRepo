@@ -5,6 +5,8 @@ using Lean.Touch;
 
 public class ClotheController_PuzzleVestir : MonoBehaviour
 {
+    
+    [SerializeField] AudioManager audioManager;
     #region public methods
     public void HandleSelect(LeanFinger finger)
     {
@@ -12,6 +14,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         {
             selectionFinger = finger;
             state = ClothingState.Dragging;
+            audioManager.Play("PieceUp");
         }
     }
 
@@ -19,11 +22,13 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
     {
         //Handle select up event
         HandleSelectUp();
+
     }
 
     public void HandleDeselect()
     {
         selectionFinger = null;
+        
     }
     #endregion
 
@@ -42,6 +47,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
     private void Start()
     {
         originalPosition = transform.position;
+        originalRotation = transform.rotation;
     }
 
     private void Update()
@@ -49,6 +55,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         if (state == ClothingState.Idle)
         {
             transform.position = originalPosition;
+            transform.rotation = originalRotation;
             mySpriteRenderer.sortingOrder = idleSortingOrder;
         }
         else 
@@ -59,7 +66,9 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         } else 
         if (state == ClothingState.Wearing)
         {
-            mySpriteRenderer.sortingOrder = idleSortingOrder;
+            mySpriteRenderer.sortingOrder = idleSortingOrder; 
+            
+            
         }
     }
 
@@ -71,7 +80,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         //Fixed target position
         targetPosition = originalPosition + differencePosition;
         targetPosition.z = 0f;
-
+        
         return targetPosition;
     }
 
@@ -92,8 +101,8 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         if (detectedCount > 0)
         {
             CharacterBodyPart_PuzzleVestir bodyPart = detectedColliders[0].GetComponent<CharacterBodyPart_PuzzleVestir>();
-
             bodyPart.SetClothing(this);
+
         }
         //If nothing was detected, set idle state
         else
@@ -106,6 +115,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
 
     #region private variables
     private Vector3 originalPosition;
+    private Quaternion originalRotation;
 
     private LeanFinger selectionFinger;
 
@@ -113,6 +123,8 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
     private Collider2D myCollider;
     [SerializeField]
     private SpriteRenderer mySpriteRenderer;
+
+    
     #endregion
 }
 
@@ -122,3 +134,4 @@ public enum ClothingState
     Dragging,
     Wearing
 }
+
