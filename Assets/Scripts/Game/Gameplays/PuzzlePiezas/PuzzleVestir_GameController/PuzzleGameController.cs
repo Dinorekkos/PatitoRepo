@@ -41,6 +41,11 @@ public class PuzzleGameController : MonoBehaviour
         
         
     }
+
+    void CheckPuzzlesID()
+    {
+    
+    }
    
    
 

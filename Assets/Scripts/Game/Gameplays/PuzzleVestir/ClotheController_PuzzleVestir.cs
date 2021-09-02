@@ -7,6 +7,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
 {
     
     [SerializeField] AudioManager audioManager;
+    CharacterBodyPart_PuzzleVestir bodyPart;
     #region public methods
     public void HandleSelect(LeanFinger finger)
     {
@@ -15,6 +16,14 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
             selectionFinger = finger;
             state = ClothingState.Dragging;
             audioManager.Play("PieceUp");
+        }
+        if (state == ClothingState.Wearing)
+        {   
+            Vector3 newposition = transform.position;
+            this.transform.position = newposition;
+            selectionFinger = finger;
+            state = ClothingState.Dragging;
+            
         }
     }
 
@@ -66,9 +75,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         } else 
         if (state == ClothingState.Wearing)
         {
-            mySpriteRenderer.sortingOrder = idleSortingOrder; 
-            
-            
+            mySpriteRenderer.sortingOrder = idleSortingOrder;  
         }
     }
 
