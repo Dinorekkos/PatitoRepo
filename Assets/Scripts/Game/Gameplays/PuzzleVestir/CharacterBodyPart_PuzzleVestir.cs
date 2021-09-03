@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
 {
     [SerializeField] private AudioManager audioManager;
+    
     #region public methods
     public void SetClothing(ClotheController_PuzzleVestir clothing)
     {
@@ -48,7 +49,10 @@ public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
     #endregion
 
     #region private methods
-
+    private void Start() 
+    {
+        
+    }
     #endregion
 
     #region private variables
@@ -58,6 +62,9 @@ public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
     private bool _isValid = false;
     #endregion
 }
+
+
+
 
 
 [System.Serializable]

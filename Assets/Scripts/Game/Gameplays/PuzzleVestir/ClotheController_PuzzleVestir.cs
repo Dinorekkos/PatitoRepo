@@ -5,7 +5,8 @@ using Lean.Touch;
 
 public class ClotheController_PuzzleVestir : MonoBehaviour
 {
-    
+    private Vector3 originalScale;
+    [SerializeField] Vector3 customScale;
     [SerializeField] AudioManager audioManager;
     CharacterBodyPart_PuzzleVestir bodyPart;
     #region public methods
@@ -57,6 +58,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
     {
         originalPosition = transform.position;
         originalRotation = transform.rotation;
+        originalScale = transform.localScale;
     }
 
     private void Update()
@@ -65,17 +67,19 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         {
             transform.position = originalPosition;
             transform.rotation = originalRotation;
+            transform.localScale = originalScale;
             mySpriteRenderer.sortingOrder = idleSortingOrder;
         }
         else 
         if (state == ClothingState.Dragging)
         {
-            transform.position = GetDraggingTargetPosition(selectionFinger);
+            transform.position = GetDraggingTargetPosition(selectionFinger);   
             mySpriteRenderer.sortingOrder = draggingSortingOrder;
         } else 
         if (state == ClothingState.Wearing)
         {
             mySpriteRenderer.sortingOrder = idleSortingOrder;  
+            transform.localScale = customScale;
         }
     }
 
