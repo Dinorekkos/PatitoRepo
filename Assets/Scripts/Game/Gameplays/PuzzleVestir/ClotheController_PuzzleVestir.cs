@@ -5,6 +5,10 @@ using Lean.Touch;
 
 public class ClotheController_PuzzleVestir : MonoBehaviour
 {
+    private Vector3 originalScale;
+    [SerializeField] Vector3 customScale;
+    [SerializeField] AudioManager audioManager;
+    CharacterBodyPart_PuzzleVestir bodyPart;
     #region public methods
     public void HandleSelect(LeanFinger finger)
     {
@@ -12,6 +16,15 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         {
             selectionFinger = finger;
             state = ClothingState.Dragging;
+            audioManager.Play("PieceUp");
+        }
+        if (state == ClothingState.Wearing)
+        {   
+            Vector3 newposition = transform.position;
+            this.transform.position = newposition;
+            selectionFinger = finger;
+            state = ClothingState.Dragging;
+            
         }
     }
 
@@ -19,11 +32,13 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
     {
         //Handle select up event
         HandleSelectUp();
+
     }
 
     public void HandleDeselect()
     {
         selectionFinger = null;
+        
     }
     #endregion
 
@@ -42,6 +57,8 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
     private void Start()
     {
         originalPosition = transform.position;
+        originalRotation = transform.rotation;
+        originalScale = transform.localScale;
     }
 
     private void Update()
@@ -49,17 +66,20 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         if (state == ClothingState.Idle)
         {
             transform.position = originalPosition;
+            transform.rotation = originalRotation;
+            transform.localScale = originalScale;
             mySpriteRenderer.sortingOrder = idleSortingOrder;
         }
         else 
         if (state == ClothingState.Dragging)
         {
-            transform.position = GetDraggingTargetPosition(selectionFinger);
+            transform.position = GetDraggingTargetPosition(selectionFinger);   
             mySpriteRenderer.sortingOrder = draggingSortingOrder;
         } else 
         if (state == ClothingState.Wearing)
         {
-            mySpriteRenderer.sortingOrder = idleSortingOrder;
+            mySpriteRenderer.sortingOrder = idleSortingOrder;  
+            transform.localScale = customScale;
         }
     }
 
@@ -71,7 +91,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         //Fixed target position
         targetPosition = originalPosition + differencePosition;
         targetPosition.z = 0f;
-
+        
         return targetPosition;
     }
 
@@ -92,8 +112,8 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         if (detectedCount > 0)
         {
             CharacterBodyPart_PuzzleVestir bodyPart = detectedColliders[0].GetComponent<CharacterBodyPart_PuzzleVestir>();
-
             bodyPart.SetClothing(this);
+
         }
         //If nothing was detected, set idle state
         else
@@ -106,6 +126,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
 
     #region private variables
     private Vector3 originalPosition;
+    private Quaternion originalRotation;
 
     private LeanFinger selectionFinger;
 
@@ -113,6 +134,8 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
     private Collider2D myCollider;
     [SerializeField]
     private SpriteRenderer mySpriteRenderer;
+
+    
     #endregion
 }
 
@@ -122,3 +145,4 @@ public enum ClothingState
     Dragging,
     Wearing
 }
+
