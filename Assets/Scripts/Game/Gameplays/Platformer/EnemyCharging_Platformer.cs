@@ -22,7 +22,8 @@ public class EnemyCharging_Platformer : MonoBehaviour
         state = EnemyChargingState.Waiting;
 
         VisionRangeTrigger.OnTriggerEnter += OnTriggerEnterVisionRange;
-        VisionRangeTrigger.OnTriggerEnter += OnTriggerEnterHurtbox; 
+        //VisionRangeTrigger.OnTriggerEnter += OnTriggerEnterHurtbox; 
+        HurboxTrigger.OnTriggerEnter += OnTriggerEnterHurtbox;
     }
 
     private void Update()

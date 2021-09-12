@@ -8,6 +8,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
     private Vector3 originalScale;
     [SerializeField] Vector3 customScale;
     [SerializeField] AudioManager audioManager;
+    Vector3 draggingPosition;
     CharacterBodyPart_PuzzleVestir bodyPart;
     #region public methods
     public void HandleSelect(LeanFinger finger)
@@ -17,6 +18,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
             selectionFinger = finger;
             state = ClothingState.Dragging;
             audioManager.Play("PieceUp");
+            draggingPosition = transform.position;
         }
         if (state == ClothingState.Wearing)
         {   
@@ -24,6 +26,8 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
             this.transform.position = newposition;
             selectionFinger = finger;
             state = ClothingState.Dragging;
+            draggingPosition = transform.position;
+            
             
         }
     }
@@ -89,7 +93,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         Vector3 targetPosition = Camera.main.ScreenToWorldPoint(finger.ScreenPosition);
         Vector3 differencePosition = targetPosition - selectPosition;
         //Fixed target position
-        targetPosition = originalPosition + differencePosition;
+        targetPosition = draggingPosition + differencePosition;
         targetPosition.z = 0f;
         
         return targetPosition;
