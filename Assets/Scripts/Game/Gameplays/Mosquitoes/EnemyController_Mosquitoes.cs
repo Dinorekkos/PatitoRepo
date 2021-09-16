@@ -36,6 +36,10 @@ namespace Gameplays.Mosquitoes
                 Destroy(this.gameObject);
             }
         }
+
+        
+
+
         #endregion
 
         #region private variables

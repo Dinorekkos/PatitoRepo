@@ -7,6 +7,10 @@ namespace Gameplays.Platformer
 {
     public class CharacterController_Platformer : MonoBehaviour
     {
+
+        public Collider2D playerCollider;
+
+
         #region public methods
         public void Jump()
         {
@@ -333,6 +337,15 @@ namespace Gameplays.Platformer
             isJumpMade = false;
             tryCancelJump = true;
         }
+
+
+        private void DetectCollidingsSides()
+        {
+            //playerCollider.GetContacts(ContactPoint2D.collider)   
+        }
+
+        
+
         #endregion
 
         #region private variables
@@ -374,6 +387,7 @@ namespace Gameplays.Platformer
     {
         Idle,
         Running,
-        Jumping
+        Jumping,
+        Colliding
     }
 }
