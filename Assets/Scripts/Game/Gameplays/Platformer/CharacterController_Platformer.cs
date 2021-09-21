@@ -36,7 +36,7 @@ namespace Gameplays.Platformer
         {
             if (CanStopJumping)
             {
-                Debug.Log("STOP VERTICAL FORCE");
+                //Debug.Log("STOP VERTICAL FORCE");
                 myCharacterController.SetVerticalForce(StopJumpSpeed);
             }
         }
@@ -158,6 +158,12 @@ namespace Gameplays.Platformer
 
         private void Update()
         {
+
+            if(!myCharacterController.State.IsGrounded)
+            {
+                Debug.Log("No tacando el suelo");
+            }
+
             if (myCharacterController.State.IsGrounded)
             {
                 counterJump = 0;

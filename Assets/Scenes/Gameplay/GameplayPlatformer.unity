@@ -194,7 +194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 89118436}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8629096934332757695, guid: c9a5eb188e3fac040bd562accb8120bc, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8629096934332757695, guid: c9a5eb188e3fac040bd562accb8120bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -576,6 +576,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1031389883}
     m_Modifications:
+    - target: {fileID: 662531214, guid: 165c9f96ca585b548873d3097acab028, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 662531216, guid: 165c9f96ca585b548873d3097acab028, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -599,6 +603,14 @@ PrefabInstance:
     - target: {fileID: 1678077232739131967, guid: 165c9f96ca585b548873d3097acab028, type: 3}
       propertyPath: m_Name
       value: Mosquito (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678077232739131967, guid: 165c9f96ca585b548873d3097acab028, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2225913775195327805, guid: 165c9f96ca585b548873d3097acab028, type: 3}
+      propertyPath: m_Layer
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4584852690494007680, guid: 165c9f96ca585b548873d3097acab028, type: 3}
       propertyPath: m_RootOrder
@@ -792,7 +804,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3641881295056146932, guid: 1f4570e4ed1430041af86c33282422a7, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3641881295056146932, guid: 1f4570e4ed1430041af86c33282422a7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -838,6 +850,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patito_Platformer
       objectReference: {fileID: 0}
+    - target: {fileID: 3641881295056146935, guid: 1f4570e4ed1430041af86c33282422a7, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641881296966399807, guid: 1f4570e4ed1430041af86c33282422a7, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466147780085487667, guid: 1f4570e4ed1430041af86c33282422a7, type: 3}
+      propertyPath: spritePlayer
+      value: 
+      objectReference: {fileID: 1906619551}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f4570e4ed1430041af86c33282422a7, type: 3}
 --- !u!1001 &327945815
@@ -1225,6 +1249,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ventilator (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3188836257272025751, guid: 7151f2b4d7f3daa4b9a7506f84c2984e, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 3188836257988888384, guid: 7151f2b4d7f3daa4b9a7506f84c2984e, type: 3}
       propertyPath: m_SortingOrder
       value: 6
@@ -1335,7 +1363,7 @@ GameObject:
   - component: {fileID: 670201036}
   - component: {fileID: 670201035}
   - component: {fileID: 670201037}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Puercoespin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1491,7 +1519,7 @@ GameObject:
   - component: {fileID: 718617764}
   - component: {fileID: 718617762}
   - component: {fileID: 718617763}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: HurtBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1698,7 +1726,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 906791961}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1803,7 +1831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 964516128}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2204,7 +2232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8629096934332757695, guid: c9a5eb188e3fac040bd562accb8120bc, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8629096934332757695, guid: c9a5eb188e3fac040bd562accb8120bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2317,7 +2345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1178029916}
   - component: {fileID: 1178029915}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: HamsterEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2379,7 +2407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8629096934332757695, guid: c9a5eb188e3fac040bd562accb8120bc, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8629096934332757695, guid: c9a5eb188e3fac040bd562accb8120bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2813,7 +2841,7 @@ GameObject:
   - component: {fileID: 1436310212}
   - component: {fileID: 1436310214}
   - component: {fileID: 1436310213}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: puercoespin2PSD_00000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2828,8 +2856,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436310211}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.033, y: -1.344, z: 0}
+  m_LocalScale: {x: 0.9760955, y: 1.0358583, z: 1}
   m_Children: []
   m_Father: {fileID: 964516128}
   m_RootOrder: 0
@@ -2844,7 +2872,7 @@ Animator:
   m_GameObject: {fileID: 1436310211}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f5b47db75e52fb24db4c31c7f55032bb, type: 2}
+  m_Controller: {fileID: 9100000, guid: 541453d7d13deea45955b86a6f2f8a34, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2893,7 +2921,7 @@ SpriteRenderer:
   m_SortingLayerID: -1850861911
   m_SortingLayer: 2
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: 07bcb60c33d5d484c9f1e952fb014733, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be2a5bd0581533e418e4c2e5b74dc296, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -2915,7 +2943,7 @@ GameObject:
   - component: {fileID: 1467930771}
   - component: {fileID: 1467930770}
   - component: {fileID: 1467930769}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: hamster_00000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3294,7 +3322,7 @@ GameObject:
   - component: {fileID: 1543712666}
   - component: {fileID: 1543712665}
   - component: {fileID: 1543712664}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: puercoespin2PSD_00000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3625,6 +3653,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bubble_Static_Platformer (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2289865274073668213, guid: df84266cd9a9b54448acc5b843abafc3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7048998884792603619, guid: df84266cd9a9b54448acc5b843abafc3, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -3685,7 +3717,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1635285392}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4101,6 +4133,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1031389883}
     m_Modifications:
+    - target: {fileID: 662531214, guid: 165c9f96ca585b548873d3097acab028, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 662531216, guid: 165c9f96ca585b548873d3097acab028, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -4124,6 +4160,18 @@ PrefabInstance:
     - target: {fileID: 1678077232739131967, guid: 165c9f96ca585b548873d3097acab028, type: 3}
       propertyPath: m_Name
       value: Mosquito (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678077232739131967, guid: 165c9f96ca585b548873d3097acab028, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678077232739131967, guid: 165c9f96ca585b548873d3097acab028, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2225913775195327805, guid: 165c9f96ca585b548873d3097acab028, type: 3}
+      propertyPath: m_Layer
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4584852690494007680, guid: 165c9f96ca585b548873d3097acab028, type: 3}
       propertyPath: m_RootOrder
@@ -4239,6 +4287,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1031389883}
     m_Modifications:
+    - target: {fileID: 662531214, guid: 165c9f96ca585b548873d3097acab028, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 662531216, guid: 165c9f96ca585b548873d3097acab028, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -4262,6 +4314,14 @@ PrefabInstance:
     - target: {fileID: 1678077232739131967, guid: 165c9f96ca585b548873d3097acab028, type: 3}
       propertyPath: m_Name
       value: Mosquito
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678077232739131967, guid: 165c9f96ca585b548873d3097acab028, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2225913775195327805, guid: 165c9f96ca585b548873d3097acab028, type: 3}
+      propertyPath: m_Layer
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4584852690494007680, guid: 165c9f96ca585b548873d3097acab028, type: 3}
       propertyPath: m_RootOrder
@@ -4391,6 +4451,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!212 &1906619551 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3641881296966399794, guid: 1f4570e4ed1430041af86c33282422a7, type: 3}
+  m_PrefabInstance: {fileID: 327690587}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1997002677
 GameObject:
   m_ObjectHideFlags: 0
@@ -4402,7 +4467,7 @@ GameObject:
   - component: {fileID: 1997002680}
   - component: {fileID: 1997002678}
   - component: {fileID: 1997002679}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: VisionRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4529,8 +4594,8 @@ GameObject:
   - component: {fileID: 2013990217}
   - component: {fileID: 2013990219}
   - component: {fileID: 2013990218}
-  m_Layer: 0
-  m_Name: Puercoespin (1)
+  m_Layer: 18
+  m_Name: Erizo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4589,7 +4654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32274d2679c9a1245a5a5ea17f33abf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
+  _speed: 0
   _range: {x: -2, y: 2}
   visualTransform: {fileID: 964516128}
 --- !u!1 &2088127581
@@ -4918,6 +4983,10 @@ PrefabInstance:
     - target: {fileID: 3188836256581304279, guid: 7151f2b4d7f3daa4b9a7506f84c2984e, type: 3}
       propertyPath: m_Name
       value: Ventilator
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188836257272025751, guid: 7151f2b4d7f3daa4b9a7506f84c2984e, type: 3}
+      propertyPath: m_Layer
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3188836257988888384, guid: 7151f2b4d7f3daa4b9a7506f84c2984e, type: 3}
       propertyPath: m_SortingOrder
