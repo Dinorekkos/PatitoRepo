@@ -27,10 +27,23 @@ public class HealthEntity : MonoBehaviour
         Physics2D.IgnoreLayerCollision(17,18, true);
         colorSprite.a = 0.5f;
         spritePlayer.material.color = colorSprite;
-        yield return new WaitForSeconds (3f);
-        Physics2D.IgnoreLayerCollision(17,18,false);
+        yield return new WaitForSeconds (0.1f);
         colorSprite.a = 1f;
         spritePlayer.material.color = colorSprite;
+        yield return new WaitForSeconds(0.1f);
+        colorSprite.a = 0.5f;
+        spritePlayer.material.color = colorSprite;
+        yield return new WaitForSeconds (0.1f);
+        colorSprite.a = 1f;
+        spritePlayer.material.color = colorSprite;
+        yield return new WaitForSeconds(0.1f); 
+        colorSprite.a = 0.5f;
+        spritePlayer.material.color = colorSprite;
+        yield return new WaitForSeconds(0.1f);
+        colorSprite.a = 1f;
+        spritePlayer.material.color = colorSprite;
+        yield return new WaitForSeconds (2f);
+        Physics2D.IgnoreLayerCollision(17,18,false);
     }
 
     public void Heal(int healAmount)

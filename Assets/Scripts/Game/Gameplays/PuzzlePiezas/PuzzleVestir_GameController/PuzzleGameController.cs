@@ -24,8 +24,20 @@ public class PuzzleGameController : MonoBehaviour
     #region private methods
     private void Update()
     {
-    
-        if (puzzlePiece[0].IsValid && puzzlePiece[1].IsValid)
+        CheckPuzzlesID();
+       
+    }
+    #endregion
+
+    void Start() 
+    {
+
+    }
+
+    void CheckPuzzlesID()
+    {
+        if (puzzlePiece[0].IsValid && puzzlePiece[1].IsValid && puzzlePiece[2].IsValid && puzzlePiece[3].IsValid && puzzlePiece[4].IsValid && puzzlePiece[5].IsValid 
+            && puzzlePiece[6].IsValid && puzzlePiece[7].IsValid)
         {
             puzzleCheckImage.color = Color.green;
             
@@ -34,20 +46,5 @@ public class PuzzleGameController : MonoBehaviour
             puzzleCheckImage.color = Color.red;
         }
     }
-    #endregion
 
-    void Start() 
-    {  
-        
-        
-    }
-
-    void CheckPuzzlesID()
-    {
-    
-    }
-   
-   
-
-    
 }

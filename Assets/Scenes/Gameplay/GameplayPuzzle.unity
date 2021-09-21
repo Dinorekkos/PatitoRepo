@@ -664,7 +664,7 @@ MonoBehaviour:
   detectLayermask:
     serializedVersion: 2
     m_Bits: 16384
-  clotheID: piece.2
+  clotheID: piece.3
   idleSortingOrder: 5
   draggingSortingOrder: 10
   myCollider: {fileID: 325612466}
@@ -976,6 +976,12 @@ MonoBehaviour:
   puzzlePiece:
   - {fileID: 1525619310}
   - {fileID: 729833171}
+  - {fileID: 1761749458}
+  - {fileID: 823277679}
+  - {fileID: 2001717938}
+  - {fileID: 861865963}
+  - {fileID: 2095497140}
+  - {fileID: 2066252052}
   puzzleCheckImage: {fileID: 1053736700}
 --- !u!1 &718996864
 GameObject:
@@ -1285,7 +1291,7 @@ MonoBehaviour:
   detectLayermask:
     serializedVersion: 2
     m_Bits: 16384
-  clotheID: piece.2
+  clotheID: piece.5
   idleSortingOrder: 5
   draggingSortingOrder: 10
   myCollider: {fileID: 731999973}
@@ -1335,7 +1341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 1480663111}
-  validID: piece.2
+  validID: piece.4
 --- !u!61 &823277680
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1566,7 +1572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 1480663111}
-  validID: piece.2
+  validID: piece.6
 --- !u!61 &861865964
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1779,7 +1785,7 @@ MonoBehaviour:
   detectLayermask:
     serializedVersion: 2
     m_Bits: 16384
-  clotheID: piece.2
+  clotheID: piece.7
   idleSortingOrder: 5
   draggingSortingOrder: 10
   myCollider: {fileID: 968419952}
@@ -2193,7 +2199,7 @@ MonoBehaviour:
   detectLayermask:
     serializedVersion: 2
     m_Bits: 16384
-  clotheID: piece.2
+  clotheID: piece.4
   idleSortingOrder: 5
   draggingSortingOrder: 10
   myCollider: {fileID: 1170844100}
@@ -2629,11 +2635,19 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: eded92bbadada74499d3cb9a7a97d56d, type: 3}
     volume: 0.586
     pitch: 1.07
+    loop: 0
     source: {fileID: 0}
   - name: PieceDown
     clip: {fileID: 8300000, guid: e1395bd9b9f4c724484b3c433bdbc889, type: 3}
     volume: 0.593
     pitch: 0.92
+    loop: 0
+    source: {fileID: 0}
+  - name: Music
+    clip: {fileID: 8300000, guid: 3246b653fece7ee47bc9f6dfbfc5e31e, type: 3}
+    volume: 0.593
+    pitch: 0.92
+    loop: 1
     source: {fileID: 0}
 --- !u!4 &1480663112
 Transform:
@@ -3049,7 +3063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 1480663111}
-  validID: piece.2
+  validID: piece.3
 --- !u!61 &1761749459
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3230,7 +3244,7 @@ MonoBehaviour:
   detectLayermask:
     serializedVersion: 2
     m_Bits: 16384
-  clotheID: piece.2
+  clotheID: piece.6
   idleSortingOrder: 5
   draggingSortingOrder: 10
   myCollider: {fileID: 1865953075}
@@ -3362,7 +3376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 1480663111}
-  validID: piece.2
+  validID: piece.5
 --- !u!61 &2001717939
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3559,7 +3573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 1480663111}
-  validID: piece.2
+  validID: piece.8
 --- !u!61 &2066252053
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3706,7 +3720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioManager: {fileID: 1480663111}
-  validID: piece.2
+  validID: piece.7
 --- !u!61 &2095497141
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3969,7 +3983,7 @@ MonoBehaviour:
   detectLayermask:
     serializedVersion: 2
     m_Bits: 16384
-  clotheID: piece.2
+  clotheID: piece.8
   idleSortingOrder: 5
   draggingSortingOrder: 10
   myCollider: {fileID: 2137514970}

@@ -21,7 +21,6 @@ namespace Gameplays.Platformer
         {
             if (CanJump)
             {
-                Debug.Log("CALL JUMP");
                 myCharacterController.SetVerticalForce(Mathf.Sqrt(jumpSpeed * Mathf.Abs(myCharacterController.Parameters.Gravity)));
                 lastJumpTime = Time.time;
                 isJumpMade = true;
@@ -158,12 +157,6 @@ namespace Gameplays.Platformer
 
         private void Update()
         {
-
-            if(!myCharacterController.State.IsGrounded)
-            {
-                Debug.Log("No tacando el suelo");
-            }
-
             if (myCharacterController.State.IsGrounded)
             {
                 counterJump = 0;
