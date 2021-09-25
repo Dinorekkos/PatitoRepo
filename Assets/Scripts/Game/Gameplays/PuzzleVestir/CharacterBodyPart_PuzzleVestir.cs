@@ -65,8 +65,6 @@ public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
 
 
 
-
-
 [System.Serializable]
 public enum BodyPartType
 {

@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class HealthEntity : MonoBehaviour
 {
-
+    [SerializeField] private GameObject playerPatito;
+    private Animator playerAnimator;
     [SerializeField] private Renderer spritePlayer;
     Color colorSprite;
 
     public void MakeDamage(int damageAmount)
     {
+        playerAnimator.SetTrigger("getDamage");
         //Remove some health
         Health -= damageAmount;
         //Invulnerability for 3 seconds
         StartCoroutine(GetInvulnerable());
+        
 
         //If healt is 0 or less than 0
         if (Health <= 0)
@@ -68,5 +71,6 @@ public class HealthEntity : MonoBehaviour
     {
         Health = MaxHealth;
         colorSprite = spritePlayer.material.color;
+        playerAnimator = playerPatito.GetComponent<Animator>();
     }
 }

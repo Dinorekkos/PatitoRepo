@@ -82,7 +82,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         } else 
         if (state == ClothingState.Wearing)
         {
-            mySpriteRenderer.sortingOrder = idleSortingOrder;  
+           mySpriteRenderer.sortingOrder = idleSortingOrder;  
             transform.localScale = customScale;
         }
     }
