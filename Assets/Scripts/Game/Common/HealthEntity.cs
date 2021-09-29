@@ -21,7 +21,7 @@ public class HealthEntity : MonoBehaviour
         //If healt is 0 or less than 0
         if (Health <= 0)
         {
-            Debug.Log("Se reinicia nivel");
+            Debug.Log("Patito se murió");
         }
     }
 

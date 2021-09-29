@@ -9,6 +9,7 @@ namespace Gameplays.Platformer
     {
 
         public Collider2D playerCollider;
+        public bool canMove;
 
 
         #region public methods
@@ -167,8 +168,10 @@ namespace Gameplays.Platformer
             }
 
             myAnimator.SetBool(ISGROUNDED_ANIM_NAME, myCharacterController.State.IsGrounded);
-
+            
+            if(canMove)
             HandleInput();
+            
             HandleHorizontalMovement();
             HandleVerticalMovement();
         }
@@ -179,7 +182,7 @@ namespace Gameplays.Platformer
             horizontalDirection = myJoystick.Horizontal;
             verticalDirection = myJoystick.Vertical;
 
-#if UNITY_EDITOR
+            #if UNITY_EDITOR
             if (Input.GetKey(KeyCode.A))
             {
                 horizontalDirection--;
