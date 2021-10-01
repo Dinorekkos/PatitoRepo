@@ -13,6 +13,7 @@ namespace DialogSystem
     {
         public Image finalImage;
         public CharacterController_Platformer controler;
+        public Button buttonOut;
        
         public bool finished { get; private set; }
         protected IEnumerator WriteText(string input, Text textHolder, Color textColor, Font textFont, float delay, AudioClip sound, float delayBetween)
@@ -27,10 +28,12 @@ namespace DialogSystem
                 yield return new WaitForSeconds(delay);
             }
             finalImage.gameObject.SetActive(true);
+            buttonOut.gameObject.SetActive(true); 
+            controler.canMove = true;
             yield return new WaitForSeconds(delayBetween);
             //yield return new WaitUntil(() => Input.GetMouseButton(0));
             finished = true;
-            controler.canMove = true;
+           
 
         }
         

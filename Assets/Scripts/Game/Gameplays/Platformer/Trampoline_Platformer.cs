@@ -11,6 +11,8 @@ namespace Gameplays.Platformer {
 
         #region public variables
 
+        [SerializeField] private AudioManager audioManager;
+
         #endregion
 
         #region private methods
@@ -24,6 +26,7 @@ namespace Gameplays.Platformer {
 
             if (character != null)
             {
+                audioManager.Play("Bounce");
                 character.AddVerticalForce(trampolineForce);
                 addedForce = true;
             }
