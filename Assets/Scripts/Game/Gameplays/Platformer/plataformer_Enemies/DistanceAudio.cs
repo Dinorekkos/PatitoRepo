@@ -11,7 +11,7 @@ public class DistanceAudio : MonoBehaviour
     [Header("Audio Clip")] 
     [SerializeField] private string clipName;
 
-    //[SerializeField] private int clipPlaceArray;
+    [SerializeField] private int clipPlaceArray;
     
     [Header("Distance Audio Interaction")]
     [SerializeField] private bool debugDistance;
@@ -22,8 +22,7 @@ public class DistanceAudio : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
-        canPlaySound = false;
-
+        //canPlaySound = false;
 
     }
 
@@ -38,9 +37,16 @@ public class DistanceAudio : MonoBehaviour
         MeasureDistance();
     }
 
+    bool playedSound = false;
     void PlaySound()
     {
+        if (playedSound)
+            return;
+
+        Debug.Log("Play sound, clip: "+clipName);
         audioManager.Play(clipName);
+
+        playedSound = true;
     }
 
    void MeasureDistance()
@@ -64,17 +70,16 @@ public class DistanceAudio : MonoBehaviour
         if (interactiveDistance > audioDistance)
         {
             canPlaySound = false;
-            PlaySound();
-            //audioManager.sounds[clipPlaceArray].volume = 1;
+            audioManager.sounds[clipPlaceArray].volume = 0;
             
         }
         if (interactiveDistance < audioDistance)
         {
             canPlaySound = true;
             //if(canPlaySound)
-            
-            
-            
+            PlaySound();
+            audioManager.sounds[clipPlaceArray].volume = 1;
+
         }
 
         
