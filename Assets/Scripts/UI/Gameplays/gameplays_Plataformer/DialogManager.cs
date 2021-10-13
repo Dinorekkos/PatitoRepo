@@ -19,6 +19,7 @@ namespace DialogSystem
         protected IEnumerator WriteText(string input, Text textHolder, Color textColor, Font textFont, float delay, AudioClip sound, float delayBetween)
         {
             controler.canMove = false;
+            
             textHolder.color = textColor;
             textHolder.font = textFont;
             for (int i = 0; i < input.Length; i++)
@@ -30,18 +31,20 @@ namespace DialogSystem
             finalImage.gameObject.SetActive(true);
             buttonOut.gameObject.SetActive(true); 
             controler.canMove = true;
+            
+            
             yield return new WaitForSeconds(delayBetween);
             //yield return new WaitUntil(() => Input.GetMouseButton(0));
+            
             finished = true;
            
 
         }
-        
-        
-        
-        
-        
-    
+
+        private void Update()
+        {
+            
+        }
     }
 }
 

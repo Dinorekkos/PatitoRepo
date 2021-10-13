@@ -26,6 +26,7 @@ namespace Gameplays.Platformer {
 
             if (character != null)
             {
+                audioManager.sounds[1].volume = 1;
                 audioManager.Play("Bounce");
                 character.AddVerticalForce(trampolineForce);
                 addedForce = true;

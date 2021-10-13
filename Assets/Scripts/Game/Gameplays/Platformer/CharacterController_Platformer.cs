@@ -8,11 +8,30 @@ namespace Gameplays.Platformer
     public class CharacterController_Platformer : MonoBehaviour
     {
 
+        [Header("Auidio")] 
+        [SerializeField] private AudioManager audio;
+
+        [SerializeField] private int healNumClip;
+        [SerializeField] private int damageNumClip;
+        
+        [Header("Player")]
         public Collider2D playerCollider;
         public bool canMove;
 
 
         #region public methods
+
+        public void PlayHealSound()
+        {
+            audio.sounds[healNumClip].volume = 1;
+            audio.Play("HealthPatito");
+        }
+
+        public void PlayDamagePatito()
+        {
+            audio.sounds[damageNumClip].volume = 1;
+            audio.Play("DamagePatito");
+        }
         public void Jump()
         {
             Jump(JumpSpeed);
@@ -58,6 +77,7 @@ namespace Gameplays.Platformer
             }
             
             //AudioController.Instance.PlayOneShotSoundEffect(SoundKeys.JumpSoundKey);
+            
             myAnimator.SetTrigger(JUMP_ANIM_NAME);
             myAnimator.SetBool(ISGROUNDED_ANIM_NAME, false);
         }
@@ -158,6 +178,13 @@ namespace Gameplays.Platformer
 
         private void Update()
         {
+
+            
+
+            if (state == PlayerState.Idle )
+            {
+                
+            }
             if (myCharacterController.State.IsGrounded)
             {
                 counterJump = 0;
@@ -168,12 +195,18 @@ namespace Gameplays.Platformer
             }
 
             myAnimator.SetBool(ISGROUNDED_ANIM_NAME, myCharacterController.State.IsGrounded);
-            
-            if(canMove)
-            HandleInput();
-            
-            HandleHorizontalMovement();
-            HandleVerticalMovement();
+
+            if (canMove)
+            {
+                HandleInput();
+
+                HandleHorizontalMovement();
+                HandleVerticalMovement();
+            }
+            else if (!canMove)
+            {
+                state = PlayerState.Idle;
+            }
         }
 
         private void HandleInput()
@@ -204,6 +237,7 @@ namespace Gameplays.Platformer
 
             if (Input.GetKeyUp(KeyCode.Space))
             {
+                
                 isJumpPressed = false;
                 isJumpMade = false;
                 tryCancelJump = true;
@@ -291,6 +325,7 @@ namespace Gameplays.Platformer
             if (isJumpPressed)
             {
                 Jump();
+                
             }
 
             if (tryCancelJump)

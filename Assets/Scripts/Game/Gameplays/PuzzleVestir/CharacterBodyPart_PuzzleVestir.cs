@@ -19,24 +19,21 @@ public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
         myClothing = clothing;
 
         myClothing.transform.position = this.transform.position;
-        myClothing.transform.rotation = Quaternion.Euler(0,0,0); 
+        myClothing.transform.rotation = Quaternion.Euler(0,0,0);
+        audioManager.sounds[1].volume = 1;
         audioManager.Play("PieceDown");
 
         myClothing.state = ClothingState.Wearing;
-       
     }
     #endregion
-
     #region public variables
     public string validID = "";
-
     public bool IsValid
     {
         get
         {
             if (myClothing == null)
                 return false;
-
             if (myClothing.clotheID.Equals(validID))
             {
                 return true;
@@ -51,7 +48,8 @@ public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
     #region private methods
     private void Start() 
     {
-        
+        audioManager.sounds[2].volume = 1;
+        audioManager.Play("Music");
     }
     #endregion
 
@@ -61,6 +59,8 @@ public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
 
     private bool _isValid = false;
     #endregion
+    
+    
 }
 
 

@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Ventilator_Platformer : MonoBehaviour
 {
+
+    [Header("AudioManager")] 
+    [SerializeField] private AudioManager audioManager;
+
+    [SerializeField] private DistanceAudio distanceAudio;
+    [SerializeField] private string clipName;
+
+    [SerializeField] private int clipPlaceArray;
+    
     #region public methods
 
     #endregion
@@ -23,6 +32,7 @@ public class Ventilator_Platformer : MonoBehaviour
     private void Start()
     {
         HurtboxTrigger.OnTriggerStay += OnTriggerStayHurtbox;
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     private void Update()
@@ -45,6 +55,8 @@ public class Ventilator_Platformer : MonoBehaviour
         if (elapsedTimeState >= idleTime)
         {
             state = VentiladorState.Attacking;
+            
+              
             elapsedTimeState = 0f;
         }
     }
@@ -56,6 +68,7 @@ public class Ventilator_Platformer : MonoBehaviour
         if (elapsedTimeState >= attackingTime)
         {
             state = VentiladorState.Idle;
+            
             elapsedTimeState = 0f;
         }
     }

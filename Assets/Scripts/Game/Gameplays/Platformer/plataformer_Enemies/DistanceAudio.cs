@@ -23,6 +23,7 @@ public class DistanceAudio : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
         //canPlaySound = false;
+        PlaySound();
 
     }
 
@@ -43,7 +44,7 @@ public class DistanceAudio : MonoBehaviour
         if (playedSound)
             return;
 
-        Debug.Log("Play sound, clip: "+clipName);
+        //Debug.Log("Play sound, clip: "+clipName);
         audioManager.Play(clipName);
 
         playedSound = true;
@@ -76,8 +77,6 @@ public class DistanceAudio : MonoBehaviour
         if (interactiveDistance < audioDistance)
         {
             canPlaySound = true;
-            //if(canPlaySound)
-            PlaySound();
             audioManager.sounds[clipPlaceArray].volume = 1;
 
         }

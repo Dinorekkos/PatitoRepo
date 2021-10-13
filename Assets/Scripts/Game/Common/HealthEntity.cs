@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Gameplays.Platformer;
 using UnityEngine;
 
 public class HealthEntity : MonoBehaviour
 {
+    [SerializeField] private CharacterController_Platformer scriptPatito;
     [SerializeField] private GameObject playerPatito;
     private Animator playerAnimator;
     [SerializeField] private Renderer spritePlayer;
@@ -12,13 +14,15 @@ public class HealthEntity : MonoBehaviour
     public void MakeDamage(int damageAmount)
     {
         playerAnimator.SetTrigger("getDamage");
+        scriptPatito.PlayDamagePatito();
+        
         //Remove some health
         Health -= damageAmount;
         //Invulnerability for 3 seconds
         StartCoroutine(GetInvulnerable());
         
 
-        //If healt is 0 or less than 0
+        //If health is 0 or less than 0
         if (Health <= 0)
         {
             Debug.Log("Patito se murió");

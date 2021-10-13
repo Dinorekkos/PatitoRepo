@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Gameplays.Platformer;
 using UnityEngine;
 
 public class HealObject : MonoBehaviour
@@ -16,7 +17,7 @@ public class HealObject : MonoBehaviour
         if (other.GetComponent<HealthEntity>())
         {
             other.GetComponent<HealthEntity>().Heal(1);
-
+            other.GetComponent<CharacterController_Platformer>().PlayHealSound();
             Destroy(this.gameObject);
         }
     }
