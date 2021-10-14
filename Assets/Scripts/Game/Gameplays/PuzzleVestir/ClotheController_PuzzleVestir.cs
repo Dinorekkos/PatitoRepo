@@ -17,7 +17,7 @@ public class ClotheController_PuzzleVestir : MonoBehaviour
         {
             selectionFinger = finger;
             state = ClothingState.Dragging;
-            audioManager.sounds[0].volume = 1;
+            //audioManager.sounds[0].volume = 1;
             audioManager.Play("PieceUp");
             draggingPosition = transform.position;
         }

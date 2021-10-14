@@ -4573,8 +4573,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1480457513}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 0.93, z: 0}
-  m_LocalScale: {x: 2.1323504, y: 2.1441584, z: 2.1062956}
+  m_LocalPosition: {x: -0.1, y: 0.961, z: 0}
+  m_LocalScale: {x: 2.1323504, y: 2.1856952, z: 2.1062956}
   m_Children: []
   m_Father: {fileID: 358642366}
   m_RootOrder: 2
@@ -4611,25 +4611,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: PieceUp
-    clip: {fileID: 8300000, guid: eded92bbadada74499d3cb9a7a97d56d, type: 3}
+    clip: {fileID: 8300000, guid: a141b3f8e2e3a1d4495f44e9a63d4a5c, type: 3}
     AudioMixerGroup: {fileID: 24300002, guid: 6d8365b9d754ffb43b364fe98bbd8484, type: 2}
     loop: 0
-    pitch: 1.07
-    _volume: 0
+    pitch: 1
+    _volume: 3
     source: {fileID: 0}
   - name: PieceDown
-    clip: {fileID: 8300000, guid: e1395bd9b9f4c724484b3c433bdbc889, type: 3}
+    clip: {fileID: 8300000, guid: ebd8ecf2b1662954b9039762160487d2, type: 3}
     AudioMixerGroup: {fileID: 24300002, guid: 6d8365b9d754ffb43b364fe98bbd8484, type: 2}
     loop: 0
-    pitch: 0.92
-    _volume: 0
+    pitch: 1
+    _volume: 3
     source: {fileID: 0}
   - name: Music
     clip: {fileID: 8300000, guid: 3246b653fece7ee47bc9f6dfbfc5e31e, type: 3}
     AudioMixerGroup: {fileID: 24300002, guid: 6d8365b9d754ffb43b364fe98bbd8484, type: 2}
-    loop: 1
-    pitch: 0.92
-    _volume: 0
+    loop: 0
+    pitch: 1.02
+    _volume: 0.334
     source: {fileID: 0}
 --- !u!4 &1480663112
 Transform:

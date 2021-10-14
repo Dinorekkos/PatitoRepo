@@ -20,7 +20,7 @@ public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
 
         myClothing.transform.position = this.transform.position;
         myClothing.transform.rotation = Quaternion.Euler(0,0,0);
-        audioManager.sounds[1].volume = 1;
+        //audioManager.sounds[1].volume = 1;
         audioManager.Play("PieceDown");
 
         myClothing.state = ClothingState.Wearing;
@@ -48,8 +48,7 @@ public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
     #region private methods
     private void Start() 
     {
-        audioManager.sounds[2].volume = 1;
-        audioManager.Play("Music");
+        
     }
     #endregion
 

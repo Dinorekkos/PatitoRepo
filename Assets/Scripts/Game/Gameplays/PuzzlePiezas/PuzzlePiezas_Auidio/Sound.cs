@@ -17,7 +17,7 @@ public class Sound
     public AudioMixerGroup AudioMixerGroup;
     public bool loop;
     [Range(0.1f,3f)]public float pitch;
-    [Range(0f, 1f)] [SerializeField] private float _volume;
+    [Range(0f, 3f)] [SerializeField] private float _volume;
     
     [HideInInspector] public AudioSource source;
     
