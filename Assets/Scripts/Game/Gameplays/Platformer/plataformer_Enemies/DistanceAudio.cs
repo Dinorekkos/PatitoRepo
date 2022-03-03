@@ -15,7 +15,7 @@ public class DistanceAudio : MonoBehaviour
     
     [Header("Distance Audio Interaction")]
     [SerializeField] private bool debugDistance;
-    [SerializeField] bool canPlaySound;
+    [SerializeField] public bool canPlaySound;
     [SerializeField] private float audioDistance;
     
     void Start()
@@ -71,12 +71,14 @@ public class DistanceAudio : MonoBehaviour
         if (interactiveDistance > audioDistance)
         {
             canPlaySound = false;
+            //if(!canPlaySound)
             audioManager.sounds[clipPlaceArray].volume = 0;
             
         }
         if (interactiveDistance < audioDistance)
         {
             canPlaySound = true;
+            //if(canPlaySound)
             audioManager.sounds[clipPlaceArray].volume = 1;
 
         }

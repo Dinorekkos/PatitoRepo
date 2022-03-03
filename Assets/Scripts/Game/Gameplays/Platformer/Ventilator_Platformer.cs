@@ -1,22 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Ventilator_Platformer : MonoBehaviour
 {
-
-    [Header("AudioManager")] 
-    [SerializeField] private AudioManager audioManager;
-
-    [SerializeField] private DistanceAudio distanceAudio;
-    [SerializeField] private string clipName;
-
-    [SerializeField] private int clipPlaceArray;
     
+    [SerializeField] private bool isActive;
     #region public methods
 
     #endregion
-
+    
     #region public variables
     public float idleTime = 2f;
     public float attackingTime = 0.3f;
@@ -28,41 +22,64 @@ public class Ventilator_Platformer : MonoBehaviour
     public Collider2D_EventHandler HurtboxTrigger;
     #endregion
 
+    [SerializeField]private AudioSource audioSource;
+    [SerializeField] private GameController gameController;
+    
+    
     #region private methods
     private void Start()
     {
         HurtboxTrigger.OnTriggerStay += OnTriggerStayHurtbox;
-        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+    }
+
+    private void OnDestroy()
+    {
+        HurtboxTrigger.OnTriggerStay -= OnTriggerStayHurtbox;
     }
 
     private void Update()
     {
+        if (gameController.GameFinished)
+        {
+            audioSource.enabled = false;
+        }
+        
         elapsedTimeState += Time.deltaTime;
 
         if (state == VentiladorState.Idle)
         {
-             UpdateIdle();
+            isActive = false;
+            if (!isActive)
+            {
+                audioSource.volume = 0;
+                UpdateIdle();
+            }
         } else if (state == VentiladorState.Attacking)
         {
-            UpdateAttacking();
+            isActive = true;
+            if (isActive)
+            {
+                audioSource.volume = 1;
+                UpdateAttacking();
+            }
         }
     }
 
     private void UpdateIdle()
     {
+        
         myAnimator.SetBool(ATTACKING_PARAMETER_NAME, false);
 
         if (elapsedTimeState >= idleTime)
         {
             state = VentiladorState.Attacking;
-            
-              
             elapsedTimeState = 0f;
         }
     }
-
+    
     private void UpdateAttacking()
     {
+        
         myAnimator.SetBool(ATTACKING_PARAMETER_NAME, true);
 
         if (elapsedTimeState >= attackingTime)

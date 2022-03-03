@@ -1,26 +1,30 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
 {
     [SerializeField] private AudioManager audioManager;
-    
+    [SerializeField]private Collider2D collider2D;
+    [SerializeField] private Collider2D collOhter;
     #region public methods
     public void SetClothing(ClotheController_PuzzleVestir clothing)
     {
         //If we had already a clothing
-        if (myClothing != null)
+        if (myClothing != null && IsValid)
         {
             //Set idle state and remove clothing reference
             myClothing.state = ClothingState.Idle;
-            myClothing = null;
+           
         }
+        
         myClothing = clothing;
 
         myClothing.transform.position = this.transform.position;
         myClothing.transform.rotation = Quaternion.Euler(0,0,0);
-        //audioManager.sounds[1].volume = 1;
+        
         audioManager.Play("PieceDown");
 
         myClothing.state = ClothingState.Wearing;
@@ -33,12 +37,17 @@ public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
         get
         {
             if (myClothing == null)
-                return false;
+            {
+                
+                return false;  
+            }
+                
             if (myClothing.clotheID.Equals(validID))
             {
                 return true;
             } else
             {
+                
                 return false;
             }
         }
@@ -48,8 +57,23 @@ public class CharacterBodyPart_PuzzleVestir : MonoBehaviour
     #region private methods
     private void Start() 
     {
-        
+        collider2D = this.GetComponent<Collider2D>();
     }
+
+    private void Update()
+    {
+        if (IsValid)
+        {
+            collider2D.enabled = false;
+            collOhter.enabled = false;
+        }
+        else
+        {
+            collider2D.enabled = true;
+            collOhter.enabled = true;
+        }
+    }
+
     #endregion
 
     #region private variables

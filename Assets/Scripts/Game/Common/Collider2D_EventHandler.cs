@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class Collider2D_EventHandler : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         OnTriggerEnter?.Invoke(collision);
+        
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -23,4 +25,6 @@ public class Collider2D_EventHandler : MonoBehaviour
     {
         OnTriggerExit?.Invoke(collision);
     }
+
+   
 }

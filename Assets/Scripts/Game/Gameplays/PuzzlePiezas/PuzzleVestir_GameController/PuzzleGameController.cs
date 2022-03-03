@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DialogSystem;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PuzzleGameController : MonoBehaviour
@@ -10,6 +12,11 @@ public class PuzzleGameController : MonoBehaviour
 
     [SerializeField] private CharacterBodyPart_PuzzleVestir[] puzzlePiece;
     [SerializeField] private Image puzzleCheckImage;
+    [SerializeField] private GameObject dialogWin;
+    [SerializeField] private DialogManager dialogManager;
+    [SerializeField] private ChangeScene changeScene;
+    [SerializeField] private int indexScene;
+    
     
     #endregion
 
@@ -25,26 +32,46 @@ public class PuzzleGameController : MonoBehaviour
     private void Update()
     {
         CheckPuzzlesID();
+        if (dialogManager.finished==true)
+        {
+            changeScene.FadeOut(indexScene);
+        }
        
     }
     #endregion
 
     void Start() 
     {
-
+        dialogWin.SetActive(false);
     }
 
     void CheckPuzzlesID()
     {
-        if (puzzlePiece[0].IsValid && puzzlePiece[1].IsValid && puzzlePiece[2].IsValid && puzzlePiece[3].IsValid && puzzlePiece[4].IsValid && puzzlePiece[5].IsValid 
-            && puzzlePiece[6].IsValid && puzzlePiece[7].IsValid)
+        bool allValid = true;
+        for (int i = 0; i < puzzlePiece.Length; i++)
         {
-            puzzleCheckImage.color = Color.green;
-            
-        } else
-        {
-            puzzleCheckImage.color = Color.red;
+            if (puzzlePiece[i].IsValid == false)
+            {
+                allValid = false;
+                
+            }
         }
+
+        if (allValid)
+        {
+
+
+            StartCoroutine(Final());
+        }
+        
+        IEnumerator Final()
+        {
+            yield return new WaitForSeconds(2f);
+            dialogWin.SetActive(true);
+        }
+     
     }
+
+    
 
 }

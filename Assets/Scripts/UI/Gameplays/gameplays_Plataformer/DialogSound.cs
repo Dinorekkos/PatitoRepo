@@ -16,7 +16,15 @@ public class DialogSound : MonoBehaviour
 
     public void PlaySound(AudioClip sound)
     {
-        source.PlayOneShot(sound);
+        try
+        {
+            source.PlayOneShot(sound);
+        }
+        catch
+        {
+            
+        }
+        
     }
     
     

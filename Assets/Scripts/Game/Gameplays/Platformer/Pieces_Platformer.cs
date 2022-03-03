@@ -28,7 +28,7 @@ public class Pieces_Platformer : MonoBehaviour
             audio.sounds[9].volume = 1;
             audio.Play("Pieza");
             count.NumPieces = count.NumPieces + 1;
-            print("Piezas recogidas: " + count.NumPieces);
+            //print("Piezas recogidas: " + count.NumPieces);
 
             Destroy(this.gameObject);
         }

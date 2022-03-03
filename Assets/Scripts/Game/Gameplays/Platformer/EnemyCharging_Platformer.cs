@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class EnemyCharging_Platformer : MonoBehaviour
     #endregion
 
     #region public variables
+    
     public float Speed
     {
         get { return _speed; }
@@ -22,8 +24,14 @@ public class EnemyCharging_Platformer : MonoBehaviour
         state = EnemyChargingState.Waiting;
 
         VisionRangeTrigger.OnTriggerEnter += OnTriggerEnterVisionRange;
-        //VisionRangeTrigger.OnTriggerEnter += OnTriggerEnterHurtbox; 
         HurboxTrigger.OnTriggerEnter += OnTriggerEnterHurtbox;
+        
+    }
+
+    private void OnDestroy()
+    {
+        VisionRangeTrigger.OnTriggerEnter -= OnTriggerEnterVisionRange;
+        HurboxTrigger.OnTriggerEnter -= OnTriggerEnterHurtbox;
     }
 
     private void Update()
@@ -43,24 +51,11 @@ public class EnemyCharging_Platformer : MonoBehaviour
         if (transform.position.x < originX - _maxDistance)
         {
             state = EnemyChargingState.Waiting;
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            movement = 0;
+            
         }
-
-        //Vector3 targetPosition = transform.position;
-        //targetPosition.x += movement;
-        //transform.position = targetPosition;
-
-        ////Check if enemy is too left
-        //if (transform.position.x < originX + _range.x)
-        //{
-        //    state = EnemyPatrollingState.GoingRight;
-        //}
-
-        ////Check if enemy is too right
-        //if (transform.position.x > originX + _range.y)
-        //{
-        //    state = EnemyPatrollingState.GoingLeft;
-        //}
+        
     }
 
     private void OnTriggerEnterVisionRange(Collider2D collision)
@@ -73,6 +68,7 @@ public class EnemyCharging_Platformer : MonoBehaviour
         if (collision.GetComponent<HealthEntity>())
         {
             collision.GetComponent<HealthEntity>().MakeDamage(1);
+            print("Detect Player");
         }
     }
 

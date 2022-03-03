@@ -1,4 +1,5 @@
-﻿using Lean.Touch;
+﻿using System;
+using Lean.Touch;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,16 +12,31 @@ namespace Gameplays.Platformer
         [Header("Auidio")] 
         [SerializeField] private AudioManager audio;
 
+        [SerializeField] private int walkNumClip;
+        [SerializeField] private float delayBetweenWalk;
+
         [SerializeField] private int healNumClip;
         [SerializeField] private int damageNumClip;
         
         [Header("Player")]
         public Collider2D playerCollider;
         public bool canMove;
+        [Header("Animation")]
+        [SerializeField] public bool pauseAnim;
+        [SerializeField]private Animator currentAnim;
 
-
+        public bool CanMove
+        {
+            get { return canMove; }
+            set { canMove = value; }
+        }
+        
         #region public methods
-
+            
+        public void PauseAnimation()
+        {
+            currentAnim.speed = 0;
+        }
         public void PlayHealSound()
         {
             audio.sounds[healNumClip].volume = 1;
@@ -41,6 +57,7 @@ namespace Gameplays.Platformer
         {
             if (CanJump)
             {
+                audio.Play("SaltoPatito");
                 myCharacterController.SetVerticalForce(Mathf.Sqrt(jumpSpeed * Mathf.Abs(myCharacterController.Parameters.Gravity)));
                 lastJumpTime = Time.time;
                 isJumpMade = true;
@@ -77,7 +94,7 @@ namespace Gameplays.Platformer
             }
             
             //AudioController.Instance.PlayOneShotSoundEffect(SoundKeys.JumpSoundKey);
-            
+            //audio.Play("SaltoPatito");
             myAnimator.SetTrigger(JUMP_ANIM_NAME);
             myAnimator.SetBool(ISGROUNDED_ANIM_NAME, false);
         }
@@ -116,7 +133,7 @@ namespace Gameplays.Platformer
                         return false;
                     }
                 }
-                //If not grounded, check if we can make another jumpg
+                //If not grounded, check if we can make another jump
                 else if (isJumpMade == false && counterJump < MaxJumps)
                 {
                     return true;
@@ -176,15 +193,16 @@ namespace Gameplays.Platformer
 
         #region private methods
 
+        private void Start()
+        {
+            audio.Play("(11)PasoPatito");
+            
+        }
+
         private void Update()
         {
 
             
-
-            if (state == PlayerState.Idle )
-            {
-                
-            }
             if (myCharacterController.State.IsGrounded)
             {
                 counterJump = 0;
@@ -196,21 +214,36 @@ namespace Gameplays.Platformer
 
             myAnimator.SetBool(ISGROUNDED_ANIM_NAME, myCharacterController.State.IsGrounded);
 
-            if (canMove)
-            {
+          
                 HandleInput();
 
                 HandleHorizontalMovement();
                 HandleVerticalMovement();
-            }
-            else if (!canMove)
-            {
-                state = PlayerState.Idle;
-            }
+                
+                //state = PlayerState.Idle;
+                if (state == PlayerState.Running)
+                {
+                    audio.sounds[walkNumClip].volume = 1;
+                }
+                else
+                {
+                    audio.sounds[walkNumClip].volume = 0;
+                }
+                
+            
         }
 
         private void HandleInput()
         {
+            if (!CanMove)
+            {
+                horizontalDirection =0;
+                verticalDirection = 0;
+                isJumpPressed = false;
+                isJumpMade = false;
+                tryCancelJump = true;
+                return;
+            }
             //Save current horizontal direction
             horizontalDirection = myJoystick.Horizontal;
             verticalDirection = myJoystick.Vertical;
@@ -233,6 +266,7 @@ namespace Gameplays.Platformer
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 isJumpPressed = true;
+                
             }
 
             if (Input.GetKeyUp(KeyCode.Space))
@@ -247,6 +281,8 @@ namespace Gameplays.Platformer
 
         private void HandleHorizontalMovement()
         {
+          
+            
             //If horizontal direction is too low, is not relevant
             if (Mathf.Abs(horizontalDirection) < 0.1f)
             {
@@ -254,6 +290,7 @@ namespace Gameplays.Platformer
                 if (state == PlayerState.Running)
                 {
                     state = PlayerState.Idle;
+                    
                 }
             }
             else
@@ -300,19 +337,12 @@ namespace Gameplays.Platformer
             {
                 newHorizontalForce = Mathf.Lerp(myCharacterController.Speed.x, newHorizontalForce, Time.deltaTime * myCharacterController.Friction * 10);
             }
-
-            //float aliveSpeedMultiplier = 1f;
-            //if (state == PlayerState.Dying)
-            //{
-            //    aliveSpeedMultiplier = Mathf.Clamp01(Mathf.Lerp(1f, 0f, (Time.time - dieTime) / dieSpeedOffTime));
-            //}
-            //newHorizontalForce *= aliveSpeedMultiplier;
-
             myCharacterController.SetHorizontalForce(newHorizontalForce);
 
             if (Mathf.Abs(newHorizontalForce) > 0.01f)
             {
                 myAnimator.SetBool(ISMOVING_ANIM_NAME, true);
+                
             }
             else
             {
@@ -324,8 +354,8 @@ namespace Gameplays.Platformer
         {
             if (isJumpPressed)
             {
-                Jump();
                 
+                Jump();
             }
 
             if (tryCancelJump)
@@ -340,13 +370,28 @@ namespace Gameplays.Platformer
             }
 
             //If state is running or idle, but is not grounded, and is not falling, set jumping
-            if ((state == PlayerState.Running || state == PlayerState.Idle) &&
-                !myCharacterController.State.IsGrounded &&
+            if ((state == PlayerState.Running || state == PlayerState.Idle) && !myCharacterController.State.IsGrounded &&
                 !myCharacterController.State.IsFalling)
             {
                 state = PlayerState.Jumping;
+                
             }
-            
+            //If state is running or idle, but is not grounded, and is falling, set falling
+            if ((state == PlayerState.Running || state == PlayerState.Idle) && !myCharacterController.State.IsGrounded &&
+                myCharacterController.State.IsFalling)
+            {
+                state = PlayerState.Falling;
+                if (state ==PlayerState.Falling)
+                {
+                    myAnimator.SetTrigger(ISFALLING_ANIM_NAME);
+                }
+            }
+            //If state is falling, but is grounded, and is not falling, set idle
+            if ((state == PlayerState.Falling) && myCharacterController.State.IsGrounded &&
+                !myCharacterController.State.IsFalling)
+            {
+                state = PlayerState.Idle;
+            }
             //myAnimator.SetFloat(VerticalSpeedAnimatorName, myCharacterController.Speed.y);
             //myAnimator.SetBool(GroundedAnimatorName, myCharacterController.State.IsCollidingBelow);
         }
@@ -381,7 +426,13 @@ namespace Gameplays.Platformer
             //playerCollider.GetContacts(ContactPoint2D.collider)   
         }
 
-        
+        IEnumerator AudioStepPatito()
+        {
+            audio.Play("(11)PasoPatito");
+            yield return new WaitForSeconds(delayBetweenWalk);
+        }
+
+
 
         #endregion
 
@@ -405,6 +456,7 @@ namespace Gameplays.Platformer
 
         private Vector3 facingRightScale = new Vector3(1, 1, 1);
         private Vector3 facingLeftScale = new Vector3(-1, 1, 1);
+        private Vector2 playerPosY;
 
         private bool isJumpMade = false;
         private int counterJump = 0;
@@ -416,6 +468,7 @@ namespace Gameplays.Platformer
         private const string ISMOVING_ANIM_NAME = "isMoving";
         private const string ISGROUNDED_ANIM_NAME = "isGrounded";
         private const string JUMP_ANIM_NAME = "jump";
+        private const string ISFALLING_ANIM_NAME = "isFalling";
         #endregion
 
     }
@@ -425,6 +478,7 @@ namespace Gameplays.Platformer
         Idle,
         Running,
         Jumping,
+        Falling,
         Colliding
     }
 }

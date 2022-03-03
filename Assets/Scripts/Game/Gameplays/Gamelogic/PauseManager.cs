@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DialogSystem;
+using Gameplays.Platformer;
 using UnityEngine;
 
 public class PauseManager : MonoBehaviour
-{
-    [SerializeField] private GameObject pausePanel;
 
+{    
+    [SerializeField] private GameController gameController;
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject[] audiosGO;
+    [SerializeField] private AudioManager audioManager;
     [SerializeField] private AudioListener playerListener;
     // Start is called before the first frame update
     void Start()
@@ -18,11 +23,39 @@ public class PauseManager : MonoBehaviour
     {
         if (pausePanel.activeInHierarchy == true)
         {
-            playerListener.enabled = false;
+           CallMutEPause();
         }
-        else if (pausePanel.activeInHierarchy == false)
+
+        if (pausePanel.activeInHierarchy == false)
         {
-            playerListener.enabled = true;
+            audioManager.CallChangesAudioManager();
+            for (int i = 0; i < audioManager.sounds.Length; i++)
+            {
+                audioManager.sounds[i].mute = false;
+            }
+            for (int i = 0; i < audiosGO.Length; i++)
+            {
+                audiosGO[i].GetComponent<AudioSource>().mute = false;
+            }
+            audioManager.CallChangesAudioManager();
         }
     }
+
+    public void CallMutEPause()
+    {
+        audioManager.CallChangesAudioManager();
+        for (int i = 0; i < audioManager.sounds.Length; i++)
+        {
+            audioManager.sounds[i].mute = true;
+        }
+        for (int i = 0; i < audiosGO.Length; i++)
+        {
+            audiosGO[i].GetComponent<AudioSource>().mute = true;
+        }
+        audioManager.CallChangesAudioManager();
+    }
+    
+        
+        
 }
+

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class HealthEntity : MonoBehaviour
 {
+    [SerializeField] private GameController gameController;
     [SerializeField] private CharacterController_Platformer scriptPatito;
     [SerializeField] private GameObject playerPatito;
     private Animator playerAnimator;
@@ -26,8 +27,10 @@ public class HealthEntity : MonoBehaviour
         if (Health <= 0)
         {
             Debug.Log("Patito se murió");
+            gameController.MakeGameFinished();
         }
     }
+    
 
     IEnumerator GetInvulnerable()
     {
@@ -76,5 +79,6 @@ public class HealthEntity : MonoBehaviour
         Health = MaxHealth;
         colorSprite = spritePlayer.material.color;
         playerAnimator = playerPatito.GetComponent<Animator>();
+        Physics2D.IgnoreLayerCollision(17,18, false);
     }
 }
